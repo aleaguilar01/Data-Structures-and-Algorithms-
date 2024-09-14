@@ -38,9 +38,4 @@ class BST:
                 current = current.right
         return False
 
-    def remove(self, value):
-        current = self
 
-        while current.value is not None:
-            if current.value == value:
-                return self
