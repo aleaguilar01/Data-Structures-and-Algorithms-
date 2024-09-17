@@ -42,21 +42,32 @@ class BinaryTree:
 
         return None
 
-    def transverse(self, node, values):
+    def transverse_top_to_bottom(self, node, values):
         values.append(node.value)
         if node.left is None and node.right is None:
             return
 
         if node.left:
-            self.transverse(node.left, values)
+            self.transverse_top_to_bottom(node.left, values)
         if node.right:
-            self.transverse(node.right, values)
+            self.transverse_top_to_bottom(node.right, values)
 
-    def deep_first_transversal(self):
+
+
+    def transverse_bottom_up(self, node, values):
+        if node is None:
+            return
+
+        self.transverse_bottom_up(node.left, values)
+        self.transverse_bottom_up(node.right, values)
+
+        values.append(node.value)
+
+    def deep_first_transversal(self, cb):
         current = self.head
         values = []
 
-        self.transverse(current, values)
+        cb(current, values)
 
         return values
 
@@ -75,7 +86,9 @@ tree.add(36)
 tree.add(20)
 
 
-print(tree.deep_first_transversal())
+print(tree.deep_first_transversal(tree.transverse_top_to_bottom))
+print(tree.deep_first_transversal(tree.transverse_bottom_up))
+
 
 
 
