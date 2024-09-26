@@ -43,7 +43,7 @@ class MaxBinaryHeap:
 
             if right_child_index < heap_length:
                 right_child = self.values[right_child_index]
-                if (swap is None and right_child > element) or (swap is not None and right_child > self.values[left_child_index]):
+                if (swap is None and right_child > element) or (swap is not None and right_child > left_child):
                     swap = right_child_index
 
             if swap is None:
@@ -66,7 +66,7 @@ class MaxBinaryHeap:
         if self.values:
             self.values[0] = end
             self.sink_down()
-        return max_value
+        return self.values
 
 
 heap = MaxBinaryHeap()
